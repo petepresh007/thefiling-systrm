@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="./style/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet"
+        type="text/css">
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js"
+        type="text/javascript" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <section class="container-center">
+            <section class="header">
+                <div class="logo-button">
+                    <p>The <span>FilingSytem</span></p>
+                    <button class="nav-btn"><i class="fa-solid fa-burger"></i></button>
+                </div>
+
+                <div class="link-container" id="nav">
+                    <ul class="link">
+                        <li><a href="/" class="scroll-link">home</a></li>
+                        <li><a href="/login" class="login">Login</a></li>
+                        <button class="logout" onclick="logoutAdmin()">logout</button>
+                        <li><a href="/upload" class="scroll-link">upload</a></li>
+                        <li><a href="/admin" class="admin-nav">admin</a></li>
+                    </ul>
+                    <button id="close-btn" class="cl-btn"><i class="fa fa-window-close"></i></button>
+                </div>
+            </section>
+
+            <div class="login-a" style="margin-top: 4rem;">
+                <h3>Admin Login</h3>
+                <div class="login-center">
+                    <form class="login-frm">
+                        <div>
+                            <label for="email">email</label>
+                            <input type="email" class="email" placeholder="Adedeji@email.com">
+                        </div>
+
+                        <div>
+                            <label for="password">password</label>
+                            <input type="password" class="password" placeholder="*****">
+                        </div>
+                        <button class="send-btn">sign in</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-center">
+            
+            </div>
+        </footer>
+    </div>
+
+    <style>
+        .login-a {
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 600px;
+        }
+
+        .login-center {
+            text-align: left;
+            background-color: white;
+            padding: 1rem;
+            max-width: 500px;
+        }
+
+        .login-frm input,
+        select {
+            width: 97%;
+            height: 40px;
+            border: 1px solid black;
+            padding: 2px;
+        }
+
+        .send-btn {
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            height: 40px;
+            margin-top: 6px;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        /**ADMIN LOGIN */
+        const email = document.querySelector(".email");
+        const password = document.querySelector(".password");
+        const loginfrm = document.querySelector(".login-frm");
+
+        loginfrm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            console.log(email.value)
+            try {
+                const { data } = await axios.post(`http://localhost:5000/api/admin/login`, { email: email.value, password: password.value });
+                if (data) {
+                    window.localStorage.setItem("adminToken", data.token);
+                    window.location.href = "/admin";
+                }
+            } catch (error) {
+                alert(error.response.data.msg);
+            }
+            email.value = "";
+            password.value = "";
+        })
+
+    </script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

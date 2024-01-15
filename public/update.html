@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filing System</title>
+    <link rel="stylesheet" href="./style/style.css">
+
+    <style>
+        .update {
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 600px;
+        }
+
+        .update-center {
+            text-align: left;
+            background-color: white;
+            padding: 1rem;
+            max-width: 500px;
+        }
+
+        .update-frm input,
+        select {
+            width: 97%;
+            height: 40px;
+            border: 1px solid black;
+            padding: 2px;
+        }
+
+        .send-btn {
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            height: 40px;
+            margin-top: 6px;
+        }
+    </style>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet"
+        type="text/css">
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"
+        defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <section class="container-center">
+            <section class="header">
+                <div class="logo-button">
+                    <p>The <span>FilingSytem</span></p>
+                    <button class="nav-btn"><i class="fa-solid fa-burger"></i></button>
+                </div>
+
+                <div class="link-container" id="nav">
+                    <ul class="link">
+                        <li><a href="/" class="scroll-link">home</a></li>
+                        <li><a href="/login" class="login">Login</a></li>
+                        <button class="logout" onclick="logoutAdmin()">logout</button>
+                        <li><a href="/upload" class="scroll-link">upload</a></li>
+                        <li><a href="/admin" class="admin-nav">admin</a></li>
+                    </ul>
+                    <button id="close-btn" class="cl-btn"><i class="fa fa-window-close"></i></button>
+                </div>
+            </section>
+
+
+            <div class="update" style="margin-top: 4rem;">
+                <button style="border: none; background: none; color: blue;" onclick="goBack()">Go Back</button>
+                <h3>Upadate</h3>
+                <div class="update-center">
+                    <form class="update-frm">
+                        <div>
+                            <label for="name">name</label>
+                            <input type="text" placeholder="name" class="name">
+                        </div>
+
+                        <div>
+                            <label for="subject">Subject/Class/Campus</label>
+                            <input type="text" placeholder="Geo/Ipaja/Year10" class="subject">
+                        </div>
+
+                        <div>
+                            <label for="test">test/note</label>
+                            <select name="" id="" class="test">
+                                <option value="fortnight">fortnight</option>
+                                <option value="midterm">midterm</option>
+                                <option value="examination">examination</option>
+                                <option value="lesson plan">lesson plan</option>
+                                <option value="lesson note">lesson note</option>
+                                <option value="mark guide">mark guide</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="term">term</label>
+                            <select name="" id="" class="term">
+                                <option value="First Term">First Term</option>
+                                <option value="Second Term">Second Term</option>
+                                <option value="Third Term">Third Term</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="file">file</label>
+                            <input type="file" accept="" class="file">
+                        </div>
+
+                        <div>
+                            <label for="Class"></label>
+                            <select name="" id="" class="Class">
+                                <option value="Year 7">Year 7</option>
+                                <option value="Year 8">Year 8</option>
+                                <option value="Year 9">Year 9</option>
+                                <option value="Year 10">Year 10</option>
+                                <option value="Year 11">Year 11</option>
+                                <option value="Year 12">Year 12</option>
+                            </select>
+                        </div>
+
+                        <button class="send-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer-center">
+
+        </div>
+    </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const updatefrm = document.querySelector(".update-frm");
+        const updateusername = document.querySelector(".name");
+        const updatesubject = document.querySelector(".subject");
+        const updatetest = document.querySelector(".test");
+        const updateterm = document.querySelector(".term");
+        const updatefile = document.querySelector(".file");
+        const updateClass = document.querySelector(".Class");
+        const updatesendbtn = document.querySelector(".send-btn");
+
+
+        const token = window.localStorage.getItem("adminToken");
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+
+        /**GETTING THE ID*/
+        const urlParams = new URLSearchParams(window.location.search);
+        console.log(urlParams)
+        const fileId = urlParams.get('fileId');
+
+        updatefrm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formdata = new FormData();
+            formdata.append("name", updateusername.value);
+            formdata.append("subject", updatesubject.value);
+            formdata.append("test", updatetest.value);
+            formdata.append("term", updateterm.value);
+            formdata.append("file", updatefile.files[0]);
+            formdata.append("Class", updateClass.value);
+
+            try {
+                const { data } = await axios.patch(`http://localhost:5000/api/file/update/${fileId}`, formdata, config);
+                if (data) {
+                    if (data) {
+                        alert("record updated succesfully....")
+                    }
+                }
+            } catch (error) {
+                alert(error.response.data.msg);
+            }
+
+            updateusername.value = ""
+            updatesubject.value = ""
+            updatefile.files = null
+        })
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

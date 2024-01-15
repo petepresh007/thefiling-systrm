@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+
+    <link rel="stylesheet" href="./style/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet"
+        type="text/css">
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"
+        defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <section class="container-center">
+            <section class="header">
+                <div class="logo-button">
+                    <p>The <span>FilingSytem</span></p>
+                    <button class="nav-btn"><i class="fa-solid fa-burger"></i></button>
+                </div>
+
+                <div class="link-container" id="nav">
+                    <ul class="link">
+                        <li><a href="/" class="scroll-link">home</a></li>
+                        <li><a href="/login" class="login">Login</a></li>
+                        <button class="logout" onclick="logoutAdmin()">logout</button>
+                        <li><a href="/upload" class="scroll-link">upload</a></li>
+                        <li><a href="/admin" class="admin-nav">admin</a></li>
+                    </ul>
+                    <button id="close-btn" class="cl-btn"><i class="fa fa-window-close"></i></button>
+                </div>
+            </section>
+
+            <div class="upload" style="margin-top: 4rem;">
+                <h3 style="margin-bottom:1rem ;">Submit Your Questions</h3>
+                <div class="upload-center">
+                    <form class="upload-frm">
+                        <div>
+                            <label for="name">name</label>
+                            <input type="text" placeholder="name" class="name">
+                        </div>
+
+                        <div>
+                            <label for="subject">Subject</label>
+                            <input type="text" placeholder="Geography" class="subject">
+                        </div>
+
+                        <div>
+                            <label for="test">test/note</label>
+                            <select name="" id="" class="test">
+                                <option value="fortnight">fortnight</option>
+                                <option value="midterm">midterm</option>
+                                <option value="examination">examination</option>
+                                <option value="lesson plan">lesson plan</option>
+                                <option value="lesson note">lesson note</option>
+                                <option value="mark guide">mark guide</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="term">term</label>
+                            <select name="" id="" class="term">
+                                <option value="First Term">First Term</option>
+                                <option value="Second Term">Second Term</option>
+                                <option value="Third Term">Third Term</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="file">file</label>
+                            <input type="file" accept="" class="file">
+                        </div>
+
+                        <div>
+                            <label for="Class"></label>
+                            <select name="" id="" class="Class">
+                                <option value="Year 7">Year 7</option>
+                                <option value="Year 8">Year 8</option>
+                                <option value="Year 9">Year 9</option>
+                                <option value="Year 10">Year 10</option>
+                                <option value="Year 11">Year 11</option>
+                                <option value="Year 12">Year 12</option>
+                            </select>
+                        </div>
+                        <button class="send-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+            <h5 class="portal-opening" style="text-align: center; margin-top: 1.5rem; font-size: 17px; color: red;">
+
+            </h5>
+            <div class="deadline-center">
+                <div class="deadline" style="margin-top: 1rem;">
+                    <div class="deadline-format">
+                        <div>
+                            <h4 class="days">34</h4>
+                            <span>days</span>
+                        </div>
+                    </div>
+
+                    <div class="deadline-format">
+                        <div>
+                            <h4 class="hours">34</h4>
+                            <span>Hours</span>
+                        </div>
+                    </div>
+
+                    <div class="deadline-format">
+                        <div>
+                            <h4 class="mins">34</h4>
+                            <span>Mins</span>
+                        </div>
+                    </div>
+
+                    <div class="deadline-format">
+                        <div>
+                            <h4 class="secs">34</h4>
+                            <span>Secs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <footer class="footer">
+            <div class="footer-center">
+
+            </div>
+        </footer>
+    </div>
+
+    <style>
+        /* .upload{
+            margin: 10px auto;
+            border: 1px solid red;
+            width: 500px;
+            padding: 1rem;
+        } */
+        .upload {
+            margin-top: 4rem;
+            /* text-align: center; */
+            /* Center the content horizontally */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Center the content horizontally */
+            justify-content: center;
+            /* Center the content vertically */
+            height: 600px;
+        }
+
+        .upload-center {
+            /* display: inline-block; */
+            /* Make it an inline block to center it horizontally */
+            text-align: left;
+            background-color: white;
+            padding: 1rem;
+            max-width: 500px;
+            /* Reset text alignment for inner content */
+        }
+
+        .upload-frm input,
+        select {
+            width: 97%;
+            height: 40px;
+            border: 1px solid black;
+            padding: 2px;
+            border: none;
+            background: whitesmoke;
+        }
+
+        .send-btn {
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            height: 40px;
+            margin-top: 6px;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        /**UPLOAD SECTION */
+        const uploadfrm = document.querySelector(".upload-frm");
+        const username = document.querySelector(".name");
+        const subject = document.querySelector(".subject");
+        const test = document.querySelector(".test");
+        const term = document.querySelector(".term");
+        const file = document.querySelector(".file");
+        const Class = document.querySelector(".Class");
+        const sendbtn = document.querySelector(".send-btn");
+
+
+        uploadfrm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formdata = new FormData();
+            formdata.append("name", username.value);
+            formdata.append("subject", subject.value);
+            formdata.append("test", test.value);
+            formdata.append("term", term.value);
+            formdata.append("file", file.files[0]);
+            formdata.append("Class", Class.value);
+
+
+            try {
+                const { data } = await axios.post(`http://localhost:5000/api/file/create`, formdata);
+                if (data) {
+                    alert(data.msg);
+                }
+            } catch (error) {
+                console.log(error)
+                alert(error.response.data.msg);
+            }
+
+            username.value = ""
+            subject.value = ""
+            file.files = null
+        })
+    </script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

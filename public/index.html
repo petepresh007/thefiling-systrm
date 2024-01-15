@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filing System</title>
+    <link rel="stylesheet" href="./style/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet"
+        type="text/css">
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js"
+        type="text/javascript" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <section class="container-center">
+            <section class="header">
+                <div class="logo-button">
+                    <p>The <span>FilingSytem</span></p>
+                    <button class="nav-btn"><i class="fa-solid fa-burger"></i></button>
+                </div>
+
+                <div class="link-container" id="nav">
+                    <ul class="link">
+                        <li><a href="/" class="scroll-link">home</a></li>
+                        <li><a href="/login" class="login">Login</a></li>
+                        <button class="logout" onclick="logoutAdmin()">logout</button>
+                        <li><a href="/upload" class="scroll-link">upload</a></li>
+                        <li><a href="/admin" class="admin-nav">admin</a></li>
+                    </ul>
+                    <button id="close-btn" class="cl-btn"><i class="fa fa-window-close"></i></button>
+                </div>
+            </section>
+
+            <div class="home" style="margin-top: 10rem;">
+                
+            </div>
+        </section>
+
+        <footer class="footer" >
+            <div class="footer-center">
+        
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
